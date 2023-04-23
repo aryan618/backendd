@@ -6,7 +6,7 @@ const axios = require("axios");
 const { Client } = require("podcast-api");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const cors = require("cors");
 const API_URL = "https://api.spotify.com/v1/browse/categories";
 
