@@ -13,7 +13,7 @@ const API_URL = "https://api.spotify.com/v1/browse/categories";
 let users = [];
 app.use(cors());
 app.use(bodyParser.json()); // middleware
-const client = Client({ apiKey: "6dc258466e3d461bb9eb42475ec41916" });
+const client = Client({ apiKey: null });
 async function getBestPodcasts() {
   try {
     const response = await client.fetchBestPodcasts({
@@ -39,6 +39,11 @@ async function listpodcastsgenres() {
     throw new Error(error);
   }
 }
+
+app.get("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.send("Welcome to our server!");
+});
 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
@@ -138,7 +143,7 @@ app.get("/podcasts/:id", (req, res) => {
 
 app.get("/search", (req, res) => {
   const searchTerm = req.query.q;
-  const client = Client({ apiKey: "6dc258466e3d461bb9eb42475ec41916" });
+  const client = Client({ apiKey: null });
   client
     .search({
       q: searchTerm,
